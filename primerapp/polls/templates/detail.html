@@ -1,0 +1,15 @@
+<h1>{{ question }}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice }}</li>
+    {% endfor %}
+</ul>
+
+<form action="{% url 'polls:vote' question.id %}" method="POST">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+    <label>{{ choice.choice_text }}</label>
+    <input value="{{ choice.id }}" name="choice" type="radio">
+    {% endfor %}
+    <input type="submit" value="Enviar">
+</form>
